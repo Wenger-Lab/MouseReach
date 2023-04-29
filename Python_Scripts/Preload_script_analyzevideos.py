@@ -1,8 +1,6 @@
 import os
-#from moviepy.editor import VideoFileClip
 
-NEW_VID_DIR = '/mnt/66E0A3E3E0A3B827/Photothrombosis_Feb_2022/Dataset/'; #watch the path format
-
+NEW_VID_DIR = '/home/user/DLC_Projects/my_data/New_Videos/' #directory of videos-to-be-analyzed
 
 print("Vid dir content:", list(os.walk(NEW_VID_DIR)))
 levels = len(list(os.walk(NEW_VID_DIR)))
@@ -18,7 +16,7 @@ for level in range(0, levels):
 
     else: #remember a new path for .csv files in first step
         oldroot = root
-        newroot = root + 'Tracking_csvs/'       #Analyzed_csvs/      
+        newroot = root + 'Tracking_csvs/' #same name has to remain in all scripts      
     
     
     if files == []:

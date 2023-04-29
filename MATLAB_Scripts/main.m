@@ -10,8 +10,8 @@ grabbing_duration = longest_grabbing_time/2; %plotting parameter
 calib_const = 213.7; %pixels; distance between corner up and corner down in RL, equals to 5.77 cm
 
 %INITIATE LOOPS OVER ALL FILES
-project_table = readtable(''); %experimental table that allocates mice to groups and staircase boxes
-directory = ''; %location of CSVs
+project_table = readtable('/home/user/my_experimental_table.xlsx'); %experimental table that allocates mice to groups and staircase boxes
+directory = '/home/user/my_dataset'; %location of CSVs
 days = dir(directory); days = {days(3:end).name}; days = char(days);
 [~,sort_days] = sort(str2num(days(:,2:end))); days = days(sort_days,:); %#ok<ST2NM> %sort ascending
 

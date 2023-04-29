@@ -1,11 +1,9 @@
 import os
 import deeplabcut
 import tensorflow as tf
-#from FrameSplitter import projectLocation, config_path
+from FrameSplitter import projectLocation, config_path
 
-config_path = '/home/nikolaus/DLC_Projects/Matej-Versuche-ab2019-10-17/DLC_Tests/Matej_November21_Triple_Tracking_1/config.yaml'
-projectLocation = '/home/nikolaus/DLC_Projects/Matej-Versuche-ab2019-10-17/DLC_Tests/Matej_November21_Triple_Tracking_1'
-##################### PART 3: Labeling, Training and Analyzing ##########################
+##################### PART 3: Labeling, Training and Analysis ##########################
 
 #change Hands, Legs in config_file to paw
 input('When ready press to label frames. ')

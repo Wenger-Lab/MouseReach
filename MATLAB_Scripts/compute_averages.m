@@ -3,10 +3,10 @@ clear
 
 %answer = input('App evaluation done? (yes/no)\n','s'); %move to main script
 %[file, path] = uigetfile('*.m','Please select the edited big table!','MultiSelect','off'); big_table_PT = readtable(path);
-huge_merge_matrix = readtable(''); 
+huge_merge_matrix = readtable('/home/user/project/huge_merge_matrix.xlsx'); 
 
 %merging edited big_merge_matrix and huge_merge_matrix
-big_table_PT = readtable(''); %big_merge_matrix after post-processing via MouseReach App
+big_table_PT = readtable('(home/user/project/big_merge_matrix.xlsx'); %big_merge_matrix after post-processing via MouseReach App
 
 [found, where] = ismember(huge_merge_matrix(:,1:4),big_table_PT(:,1:4)); %update grab & success from app
 huge_merge_matrix.Success(found) = big_table_PT.Success(where(found));
@@ -127,8 +127,8 @@ end
 
 %add grabs and pellets from separate tables
 reach_table = groupsummary(huge_merge_matrix_wo_outliers,["Day","Mouse","Hand"]); %trial, tongue and slips have been already removed
-auto_pellets_right = readtable(''); auto_pellets_right = table2array(auto_pellets_right);
-auto_pellets_left = readtable(''); auto_pellets_left = table2array(auto_pellets_left);
+auto_pellets_right = readtable('pellet_table1.xlsx'); auto_pellets_right = table2array(auto_pellets_right);
+auto_pellets_left = readtable('pellet_table2.xlsx'); auto_pellets_left = table2array(auto_pellets_left);
 auto_sum_right = sum(auto_pellets_right); auto_sum_left = sum(auto_pellets_left);
 summary_table.ReachesCount(:) = 0; summary_table.PelletsCount(:) = 0;
 

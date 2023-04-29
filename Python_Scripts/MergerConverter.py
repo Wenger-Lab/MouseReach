@@ -32,7 +32,7 @@ def redecorator(my_csv, box):
     newdf.rename(columns={'coords':'frames'}, inplace=True)
     
     global my_csv_path
-    redecorator_path = my_csv.replace('Tracking_csvs/' , 'Tracking_csvs/redecorator/') #Analyzed_csvs before
+    redecorator_path = my_csv.replace('Tracking_csvs/' , 'Tracking_csvs/redecorator/') #stays the same in all scripts
     if not os.path.exists(os.path.dirname(redecorator_path)):
         os.makedirs(os.path.dirname(redecorator_path))    
     my_csv_path = os.path.splitext(redecorator_path)[0] + '_EDIT_' + str(box+1) + os.path.splitext(redecorator_path)[1]
@@ -83,42 +83,7 @@ def merger(all_csv_paths, loclist_length):
             #sio.savemat(new_mat_path, new_csv_i)
                 
         
-############  
-    
-    
-# =============================================================================
-# 
-# #for testing
-# 
-# newvideos_list = {1: ['/home/nikolaus/DLC_Projects/Matej-Versuche-ab2019-10-17/Trial_folder/Analyzed_csvs/1/17-11/Folder_1/',
-#   '/home/nikolaus/DLC_Projects/Matej-Versuche-ab2019-10-17/Trial_folder/Analyzed_csvs/1/17-11/Folder_2/',
-#   '/home/nikolaus/DLC_Projects/Matej-Versuche-ab2019-10-17/Trial_folder/Analyzed_csvs/1/18-11/Folder_1/',
-#   '/home/nikolaus/DLC_Projects/Matej-Versuche-ab2019-10-17/Trial_folder/Analyzed_csvs/1/18-11/Folder_2/'],
-#  2: ['/home/nikolaus/DLC_Projects/Matej-Versuche-ab2019-10-17/Trial_folder/Analyzed_csvs/2/17-11/Folder_1/',
-#   '/home/nikolaus/DLC_Projects/Matej-Versuche-ab2019-10-17/Trial_folder/Analyzed_csvs/2/17-11/Folder_2/',
-#   '/home/nikolaus/DLC_Projects/Matej-Versuche-ab2019-10-17/Trial_folder/Analyzed_csvs/2/18-11/Folder_1/',
-#   '/home/nikolaus/DLC_Projects/Matej-Versuche-ab2019-10-17/Trial_folder/Analyzed_csvs/2/18-11/Folder_2/'],
-#  3: ['/home/nikolaus/DLC_Projects/Matej-Versuche-ab2019-10-17/Trial_folder/Analyzed_csvs/3/17-11/Folder_1/',
-#   '/home/nikolaus/DLC_Projects/Matej-Versuche-ab2019-10-17/Trial_folder/Analyzed_csvs/3/17-11/Folder_2/',
-#   '/home/nikolaus/DLC_Projects/Matej-Versuche-ab2019-10-17/Trial_folder/Analyzed_csvs/3/18-11/Folder_1/',
-#   '/home/nikolaus/DLC_Projects/Matej-Versuche-ab2019-10-17/Trial_folder/Analyzed_csvs/3/18-11/Folder_2/'],
-#  4: ['/home/nikolaus/DLC_Projects/Matej-Versuche-ab2019-10-17/Trial_folder/Analyzed_csvs/4/17-11/Folder_1/',
-#   '/home/nikolaus/DLC_Projects/Matej-Versuche-ab2019-10-17/Trial_folder/Analyzed_csvs/4/17-11/Folder_2/',
-#   '/home/nikolaus/DLC_Projects/Matej-Versuche-ab2019-10-17/Trial_folder/Analyzed_csvs/4/18-11/Folder_1/',
-#   '/home/nikolaus/DLC_Projects/Matej-Versuche-ab2019-10-17/Trial_folder/Analyzed_csvs/4/18-11/Folder_2/']}
-# 
-# 
-# all_combos = [((0, 299), (0, 239)), ((0, 299), (240, 479)), ((340, 639), (0, 239)), ((340, 639), (240, 479))]
-# 
-# boxes = 4
-# 
-# 
-# 
-# =============================================================================
-##########
-
-
-
+#MAIN
 
 #boxes_number = list(dict.values(newvideos_list)) #how many boxes/splits were created (1,2,3,4)
 loclist_length = len(newvideos_list[1])

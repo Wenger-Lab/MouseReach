@@ -1,16 +1,15 @@
 import os
 import deeplabcut
 import tensorflow as tf
-#from AnalyzeTrain import projectLocation
-from Preload_script_analyzevideos import NEW_VID_DIR, my_new_files, csv_paths
-projectLocation = '/home/nikolaus/DLC_Projects/Matej-Versuche-ab2019-10-17/DLC_Tests/Matej_November21_Triple_Tracking_1'
-###################### PART 4: Hatem's script: Analysis of new videos ############################
+
+from AnalyzeTrain import projectLocation #in case you're using an already existing network to analyze new videos, comment AnalyzeTrain and uncomment projectLocation
+from Preload_script_analyzevideos import NEW_VID_DIR, my_new_files, csv_paths #define NEW_VID_DIR here!
+#projectLocation = '/home/user/DLC_Projects/my_old_project'
+
+###################### PART 4: "Hatem's script": Analysis of new videos ############################
 
 #change directories
 config_template = projectLocation + '/config.yaml';
-
-
-#NEW_VID_DIR='/home/nikolaus/DLC_Projects/Matej-Versuche-ab2019-10-17/New_Videos/' 
 
 x_combos = [(0,299),(340,639)]
 y_combos = [(0,239),(240,479)]
@@ -20,8 +19,8 @@ y_combos = [(0,239),(240,479)]
 # The x, y coordinates of the areas to be cropped. (x1, y1, x2, y2), produce 4 pictures
 #crop_areas = [(0, 0, 299, 239), (340, 0, 639, 239), (0, 240, 299, 479), (340, 240, 639, 479)];
 
-# xs coordinates, ys coordinates of the Combos (xs, ys) list
-#NIKO: Combos are: [((0, 300), (0, 200)), ((0, 300), (280, 479)), ((340, 639), (0, 200)), ((340, 639), (280, 479))]
+#xs coordinates, ys coordinates of the Combos (xs, ys) list
+#Combos are: [((0, 300), (0, 200)), ((0, 300), (280, 479)), ((340, 639), (0, 200)), ((340, 639), (280, 479))]
 #list(enumerate(all_combos) = [(0, ((0, 299), (0, 239))),
 #                             (1, ((0, 299), (240, 479))),
 #                             (2, ((340, 639), (0, 239))),
@@ -41,20 +40,7 @@ all_combos = list(product(x_combos,y_combos))
 print("Combos are:", all_combos)
 #printed all coordinate combinations
 
-#######
-#print("Vid dir content:", list(os.walk(NEW_VID_DIR)))
-#root, dir, files = list(os.walk(NEW_VID_DIR))[0]
-#my_new_files = list(map(lambda fp: root + fp, files))
-#
-#print("my vid files:", my_new_files) 
-##now we have a list of video files
-#####
-
-#imported Preload_script_analyzevideos instead of introducing videos
-
-
 template = open(config_template,'r').read()
-
 
 #identity x (idx), xs coordinates, ys coordinates of the Combos (xs, ys) list
 config_files = []
@@ -78,25 +64,19 @@ for idx, (xs, ys) in enumerate(all_combos):
   text = text.replace(liney1[0],'y1: ' + str(ys[0]))
   text = text.replace(liney2[0],'y2: ' + str(ys[1]))
   text = text.replace(linecrop[0],'cropping: true')
-  config_fp = projectLocation + '/config_' + str(idx) + '.yaml' #change directory (Hatem wrote)
+  config_fp = projectLocation + '/config_' + str(idx) + '.yaml' #change directory
   output_file = open(config_fp, 'w')
   output_file.write(text)
   output_file.close()
   config_files.append(config_fp) #add the new config_n to the list of config files to be used later
  
+    
 #--------------------------------------  
-#THE POINT of this FOR loop: create 4 config_n.yaml files for the 4 parts of video-to-be-analyzed
+#Create 4 config_n.yaml files for the 4 parts of video-to-be-analyzed
 #--------------------------------------
 
-
-#config_files = ['/home/nikolaus/DLC_Projects/Matej-Versuche-ab2019-10-17/DLC_Tests/TestbisHatemScript-Matej-2019-11-19/config_0.yaml',
-# '/home/nikolaus/DLC_Projects/Matej-Versuche-ab2019-10-17/DLC_Tests/TestbisHatemScript-Matej-2019-11-19/config_1.yaml',
-# '/home/nikolaus/DLC_Projects/Matej-Versuche-ab2019-10-17/DLC_Tests/TestbisHatemScript-Matej-2019-11-19/config_2.yaml',
-# '/home/nikolaus/DLC_Projects/Matej-Versuche-ab2019-10-17/DLC_Tests/TestbisHatemScript-Matej-2019-11-19/config_3.yaml']
-
-analyzed_videos = NEW_VID_DIR + 'Tracking_csvs/'  #linked to newroot = root + 'Analyzed_csvs/' in preload
+analyzed_videos = NEW_VID_DIR + 'Tracking_csvs/'
 newvideos_list = {}
-
 
 boxes = 0
 for config_file in config_files: 
@@ -124,8 +104,7 @@ for config_file in config_files:
 #--------------------
   
   
-
-#THE POINT of the script:
+#script summary:
   #create a list of videos
   #create a list of combos
   #go through combos to create 4 config_n files

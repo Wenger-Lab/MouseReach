@@ -1,20 +1,19 @@
 import os
 import deeplabcut
 import tensorflow as tf
-#from Prescript import videoFiles, projectFolder, rescuedimagesFolder, projectLocation, config_path
+
+#in case this is first run, uncomment 'Prescript', in case you're adding videos, uncomment 'Additional_Videos'
+from Prescript import videoFiles, projectFolder, rescuedimagesFolder, projectLocation, config_path
 #from Additional_Videos import videoFiles, projectFolder, rescuedimagesFolder, projectLocation, config_path
 
 
-####################### PART 2: Frame-splitting (inside 3 FOR loops) ###########################
+####################### PART 2: Frame-splitting ###########################
 
 
 ######Image module and cropping function defined outside the FOR loop###### 
-
 from PIL import Image
 from skimage.metrics import structural_similarity as ssim 
 import numpy
-
- 
 
 # The x, y coordinates of the areas to be cropped. (x1, y1, x2, y2), produce 4 pictures
 #crop_areas = [(0, 0, 299, 239), (340, 0, 639, 239), (0, 240, 299, 479), (340, 240, 639, 479)];
@@ -44,13 +43,13 @@ for x in range(0, len(videoFiles)):
     for y in range(0, len(framesList)):
         
         image_name = myfolder_temporary + '/' + framesList[y]; #function needs full directory
-        #for testing image_name = '/home/nikolaus/Downloads/download.PNG';
+        #for testing image_name = '/home/user/directory/image.PNG';
         img = Image.open(image_name);
         
 
         #######LOOP 3: Loops through the "crop_areas" list and crops the image based on the coordinates in the list
         for i, crop_area in enumerate(crop_areas): #enumerate('strings', starting number) adds a number to each string or character
-            filename = os.path.splitext(image_name)[0] #splits download.jpg into download(0) && .png(1)
+            filename = os.path.splitext(image_name)[0] #splits image.jpg into image(0) && .png(1)
             ext = os.path.splitext(image_name)[1]
             new_filename = myfolder_temporary + '/' + str(i+1) + '_' + os.path.basename(os.path.normpath(filename)) + ext #make new name
             #crop the original image (img)
